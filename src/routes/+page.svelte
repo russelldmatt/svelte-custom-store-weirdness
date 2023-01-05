@@ -25,14 +25,14 @@
 
 	import Tags from './Tags.svelte';
 
-	let initialA: Set<string> = new Set();
+	let initialA = new Set();
 	let a = myWritable('a', initialA);
 	console.log({ a: $a });
 
 	let b = myWritable('b', new Set());
 	console.log({ b: $b });
 
-	let initialC: Set<string> = new Set();
+	let initialC = new Set();
 	let c = myWritable('c', initialC);
 	console.log({ c: $c });
 
