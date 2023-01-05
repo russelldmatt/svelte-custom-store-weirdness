@@ -1,11 +1,9 @@
 <script lang="ts">
-	import type { Writable, Updater, Subscriber } from 'svelte/store';
-
-	export function myWritable<T>(name: string, initialValue: T): Writable<T> {
+	export function myWritable(name, initialValue) {
 		let currentValue = initialValue;
-		let subscriptions: Set<Subscriber<T>> = new Set();
+		let subscriptions = new Set();
 
-		let subscribe = (f: Subscriber<T>) => {
+		let subscribe = (f) => {
 			f(currentValue);
 			subscriptions.add(f);
 			return function unsubscribe() {
@@ -13,12 +11,12 @@
 			};
 		};
 
-		function set(value: T) {
+		function set(value) {
 			currentValue = value;
 			subscriptions.forEach((f) => f(currentValue));
 		}
 
-		function update(f: Updater<T>) {
+		function update(f) {
 			set(f(currentValue));
 		}
 
